@@ -1,9 +1,23 @@
 class LecturesController < ApplicationController
-  before_action :set_lecture, only: %i[ show edit update destroy ]
+  before_action :set_lecture, only: %i[show edit update destroy]
 
-  # GET /lectures or /lectures.json
   def index
     @lectures = Lecture.all
+    organized_tracks = OrganizeTracksService.new(@lectures).organize_tracks
+
+    if organized_tracks[:organize]
+      organized_data = {}
+
+      organized_tracks[:data].each do |item|
+        track = item[:track]
+        organized_data[track] ||= []
+        organized_data[track] << item
+      end
+
+      @tracks = organized_data
+    else
+      @error = organized_tracks[:error]
+    end
   end
 
   # GET /lectures/1 or /lectures/1.json

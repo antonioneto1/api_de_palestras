@@ -1,14 +1,18 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Lectures</h1>
-
-<div id="lectures">
-  <% @lectures.each do |lecture| %>
-    <%= render lecture %>
-    <p>
-      <%= link_to "Show this lecture", lecture %>
-    </p>
-  <% end %>
-</div>
-
+<% @tracks.each do |track, lectures| %>
+  <h2>Track <%= track %></h2>
+  <table>
+    <tr>
+      <th>Schedule</th>
+      <th>Title</th>
+      <th>Duration</th>
+    </tr>
+    <% lectures.each do |lecture| %>
+      <tr>
+        <td><%= lecture[:schedule] %></td>
+        <td><%= lecture[:title] %></td>
+        <td><%= lecture[:duration] %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
 <%= link_to "New lecture", new_lecture_path %>
