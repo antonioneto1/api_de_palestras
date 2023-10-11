@@ -1,0 +1,17 @@
+default: &default
+  adapter: postgresql
+  host: <%= ENV.fetch("DATABASE_HOST") %>
+  port: <%= ENV.fetch("DATABASE_PORT") %>
+  username: <%= ENV.fetch("DATABASE_USERNAME") %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD") %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: api_de_palestras_development
+test:
+  <<: *default
+  database: api_de_palestras_test
+production:
+  <<: *default
+  database: api_de_palestras_production
