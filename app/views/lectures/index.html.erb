@@ -1,18 +1,28 @@
-<% @tracks.each do |track, lectures| %>
-  <h2>Track <%= track %></h2>
-  <table>
-    <tr>
-      <th>Schedule</th>
-      <th>Title</th>
-      <th>Duration</th>
-    </tr>
-    <% lectures.each do |lecture| %>
+<div class="container mt-4">
+  <h1 class="text-center">Lista de Palestras</h1>
+  <table class="table table-bordered">
+    <thead class="thead-dark">
       <tr>
-        <td><%= lecture[:schedule] %></td>
-        <td><%= lecture[:title] %></td>
-        <td><%= lecture[:duration] %></td>
+        <th>Horário</th>
+        <th>Título</th>
+        <th>Duração (minutos)</th>
       </tr>
-    <% end %>
+    </thead>
+    <tbody>
+      <% @tracks.each do |track, sessions| %>
+        <tr>
+          <th class="bg-info" scope="row" colspan="3">Track <%= track %></th>
+        </tr>
+        <% sessions.each_with_index do |session, index| %>
+          <tr class="<%= 'table-secondary' if index.even? %>">
+            <td><%= session[:schedule] %></td>
+            <td><%= session[:title] %></td>
+            <% if session[:duration].present? %>
+              <td><%= "#{session[:duration]} Min" %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
   </table>
-<% end %>
-<%= link_to "New lecture", new_lecture_path %>
+</div>
