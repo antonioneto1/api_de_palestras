@@ -31,6 +31,8 @@ class Api::V1::LecturesController < Api::V1::ApiController
   def organize_event
     @lectures = Lecture.all
 
+    return [] if @lectures.empty?
+
     @tracks = OrganizeTracksService.new(@lectures).organize_tracks
 
     if @tracks[:organize]

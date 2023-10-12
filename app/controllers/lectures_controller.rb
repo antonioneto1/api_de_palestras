@@ -1,8 +1,12 @@
 class LecturesController < ApplicationController
+  require 'csv'
   before_action :set_lecture, only: %i[show edit update destroy]
 
   def index
     @lectures = Lecture.all
+
+    return [] if @lectures.empty?
+
     organized_tracks = OrganizeTracksService.new(@lectures).organize_tracks
 
     if organized_tracks[:organize]
@@ -30,8 +34,31 @@ class LecturesController < ApplicationController
   end
 
   def import_csv
-    # Lógica para importação de CSV aqui
-    # Certifique-se de que o arquivo CSV seja processado e as palestras sejam criadas no banco de dados
+    uploaded_file = params[:file]
+
+    if uploaded_file.nil?
+      flash[:alert] = "Selecione um arquivo CSV para importar."
+      redirect_to import_lectures_path
+      return
+    end
+
+    if uploaded_file.content_type != 'text/csv'
+      flash[:alert] = "Selecione um arquivo CSV válido."
+      redirect_to import_lectures_path
+      return
+    end
+
+    service = LectureImportService.new
+    result = service.import(uploaded_file)
+
+    if result[:success]
+      flash[:notice] = "#{result[:created_count]} palestras criadas com sucesso!"
+    else
+      flash[:alert] = "Ocorreram erros durante a importação."
+    end
+    redirect_to lectures_path
+  rescue StandardError => e
+    flash[:alert] = "Ocorreu um erro durante a importação: #{e.message}"
   end
 
   # GET /lectures/1/edit
