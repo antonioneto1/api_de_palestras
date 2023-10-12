@@ -1,6 +1,6 @@
 class ExtractSchedulesService
-  def initialize(schedules_array)
-    @timesheet = schedules_array
+  def initialize(data)
+    @data_lactures = data
     @custom_duration = { 'lightning' => '05min' }
   end
 
@@ -11,24 +11,31 @@ class ExtractSchedulesService
   private
 
   def extract_schedules
-    timesheet_formatted = []
+    data_lactures_formatted = []
 
-    @timesheet.each do |row|
-      description = extract_description(row)
-      minutes = extract_minutes(row)
+    @data_lactures.each do |row|
+      title = extract_title(row)
+      duration = extract_duration(row)
 
-      timesheet_formatted.push({ description: description, minutes: minutes })
+      data_lactures_formatted << { title: title, duration: duration }
     end
 
-    timesheet_formatted
+    data_lactures_formatted
   end
 
-  def extract_description(row)
-    row.gsub(/\s+/, " ").strip.match(/.*[\D]+?\s/).to_s
+  def extract_title(row)
+    row.dig("title").gsub(/\s+/, " ").strip.match(/.*[\D]+?\s/).to_s
   end
 
-  def extract_minutes(row)
-    minutes_match = row.strip.match(/[\d]+min$|[\d]+(\s)min$/).to_s.delete(' ')
-    minutes_match.empty? ? @custom_duration['lightning'] : minutes_match
+  def extract_duration(row)
+    duration = row.dig("duration")
+
+    return 5 if duration.to_s.downcase == 'lightning'
+
+    minutes = duration.to_i
+    return minutes if minutes > 0
+
+    duration.gsub!(/[^0-9]/, '')
+    duration.to_i
   end
 end
