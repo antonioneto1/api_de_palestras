@@ -29,11 +29,15 @@ class LecturesController < ApplicationController
     @lecture = Lecture.new
   end
 
+  def import_csv
+    # Lógica para importação de CSV aqui
+    # Certifique-se de que o arquivo CSV seja processado e as palestras sejam criadas no banco de dados
+  end
+
   # GET /lectures/1/edit
   def edit
   end
 
-  # POST /lectures or /lectures.json
   def create
     @lecture = Lecture.new(lecture_params)
 
@@ -48,7 +52,6 @@ class LecturesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /lectures/1 or /lectures/1.json
   def update
     respond_to do |format|
       if @lecture.update(lecture_params)
@@ -61,7 +64,6 @@ class LecturesController < ApplicationController
     end
   end
 
-  # DELETE /lectures/1 or /lectures/1.json
   def destroy
     @lecture.destroy
 
@@ -72,13 +74,12 @@ class LecturesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_lecture
-      @lecture = Lecture.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def lecture_params
-      params.require(:lecture).permit(:title, :duration)
-    end
+  def set_lecture
+    @lecture = Lecture.find(params[:id])
+  end
+
+  def lecture_params
+    params.require(:lecture).permit(:title, :duration)
+  end
 end

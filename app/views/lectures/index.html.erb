@@ -1,4 +1,4 @@
-<div class="container mt-4">
+<div data-controller="lecture" class="container mt-4">
   <h1 class="text-center">Lista de Palestras</h1>
   <table class="table table-bordered">
     <thead class="thead-dark">
@@ -25,4 +25,6 @@
       <% end %>
     </tbody>
   </table>
+
+  <%= link_to "Adicionar Palestras", new_lecture_path %>
 </div>
