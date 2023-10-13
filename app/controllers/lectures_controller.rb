@@ -7,7 +7,7 @@ class LecturesController < ApplicationController
 
     return [] if @lectures.empty?
 
-    organized_tracks = OrganizeTracksService.new(@lectures).organize_tracks
+    organized_tracks = OrganizeTracksService.new(@lectures).run
 
     if organized_tracks[:organize]
       organized_data = {}

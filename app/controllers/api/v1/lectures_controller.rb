@@ -33,7 +33,7 @@ class Api::V1::LecturesController < Api::V1::ApiController
 
     return [] if @lectures.empty?
 
-    @tracks = OrganizeTracksService.new(@lectures).organize_tracks
+    @tracks = OrganizeTracksService.new(@lectures).run
 
     if @tracks[:organize]
       render json: @tracks[:data] || [], status: 200

@@ -17,6 +17,12 @@ class OrganizeTracksService
   # 540 de até 720 são 180
   # 780 de até 1020 são 240
 
+  def run
+    organize_tracks
+  end
+
+  private
+
   def organize_tracks
     current_minutes = @minutes_in_hours['9h']
 
@@ -34,8 +40,6 @@ class OrganizeTracksService
   rescue StandardError
     { error: 'Erro ao Organizar Horários.', organize: false }
   end
-
-  private
 
   def process_item(item, track, current_minutes, only_numbers_from_minutes, schedules, schedules_array)
     if current_minutes == @minutes_in_hours['12h'] && current_minutes <= @minutes_in_hours['13h']
