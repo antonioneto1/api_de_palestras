@@ -8,11 +8,7 @@ Rails.application.routes.draw do
 
   resources :lectures do
     collection do
-      get :import
       post :import_csv
-    end
-    member do
-      delete :destroy
     end
   end
 

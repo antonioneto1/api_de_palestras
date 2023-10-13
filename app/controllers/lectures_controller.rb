@@ -11,7 +11,6 @@ class LecturesController < ApplicationController
 
     if organized_tracks[:organize]
       organized_data = {}
-
       organized_tracks[:data].each do |item|
         track = item[:track]
         organized_data[track] ||= []

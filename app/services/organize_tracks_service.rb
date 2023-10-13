@@ -5,11 +5,11 @@ class OrganizeTracksService
     @lectures = organize_lectures(lectures, [180, 240])
     @alphabet_index = ('A'..'Z').to_a
     @minutes_in_hours = {
-      '9h' => 540, '12h' => 720, '13h' => 780, '15h' => 900, '16h' => 960, '17h' => 1020
+      '9:00' => 540, '12:00' => 720, '13:00' => 780, '15:00' => 900, '16:00' => 960, '17:00' => 1020
     }
     @coffee_break = {
-      'lunch' => { 'hour' => '12h', 'title' => 'almoço', 'duration' => 60 },
-      'network' => { 'hour' => '17h', 'title' => 'Evento de netWork', 'duration' => '' }
+      'lunch' => { 'hour' => '12:00', 'title' => 'Almoço', 'duration' => '' },
+      'network' => { 'hour' => '17:00', 'title' => 'Evento de NetWork', 'duration' => '' }
     }
     @count_track = 0
     @track = @alphabet_index[@count_track]
@@ -22,7 +22,7 @@ class OrganizeTracksService
   private
 
   def create_tracks
-    current_minutes = @minutes_in_hours['9h']
+    current_minutes = @minutes_in_hours['9:00']
 
     schedules_array = []
     @lectures.each do |item|
@@ -40,9 +40,9 @@ class OrganizeTracksService
   end
 
   def process_item(item, track, current_minutes, only_numbers_from_minutes, schedules, schedules_array)
-    if current_minutes == @minutes_in_hours['12h'] && current_minutes <= @minutes_in_hours['13h']
+    if current_minutes == @minutes_in_hours['12:00'] && current_minutes <= @minutes_in_hours['13:00']
       current_minutes, schedules_array = handle_lunch_break(item, track, current_minutes, schedules, schedules_array)
-    elsif current_minutes >= @minutes_in_hours['17h']
+    elsif current_minutes >= @minutes_in_hours['17:00']
       current_minutes, track, schedules_array = handle_networking_event(item, track, current_minutes, schedules_array)
     else
       schedules_array << {
@@ -65,6 +65,7 @@ class OrganizeTracksService
     new_schedules = @coffee_break['lunch']['hour']
     new_title = @coffee_break['lunch']['title']
     new_minutes = @coffee_break['lunch']['duration']
+    id = item[:id]
 
     schedules_array << {
                         schedule: new_schedules,
@@ -73,13 +74,14 @@ class OrganizeTracksService
                         track: track
                       }
 
-    current_minutes = @minutes_in_hours['13h']
+    current_minutes = @minutes_in_hours['13:00']
 
     schedules_array << {
-                        schedule: formatted_duration(@minutes_in_hours['13h']),
+                        schedule: formatted_duration(@minutes_in_hours['13:00']),
                         title: old_title,
                         duration: old_minutes,
-                        track: track
+                        track: track,
+                        id: id
                       }
 
     current_minutes += old_minutes
@@ -92,6 +94,7 @@ class OrganizeTracksService
     new_schedules = @coffee_break['network']['hour']
     new_title = @coffee_break['network']['title']
     new_minutes = @coffee_break['network']['duration']
+    id = item[:id]
 
     schedules_array << {
                         schedule: new_schedules,
@@ -104,9 +107,9 @@ class OrganizeTracksService
 
     @track = @alphabet_index[@count_track]
 
-    current_minutes = @minutes_in_hours['9h']
+    current_minutes = @minutes_in_hours['9:00']
 
-    schedules_array << { schedule: formatted_duration(current_minutes), title: old_title, duration: old_minutes, track: @track }
+    schedules_array << { schedule: formatted_duration(current_minutes), title: old_title, duration: old_minutes, track: @track, id: id }
 
     current_minutes += old_minutes
     [current_minutes, @track, schedules_array]

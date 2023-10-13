@@ -10,20 +10,21 @@
       </tr>
     </thead>
     <tbody>
-      <% @tracks.each do |track, sessions| %>
+      <% @tracks.each do |track, items| %>
         <tr>
           <th class="bg-info" scope="row" colspan="3">Track <%= track %></th>
         </tr>
-        <% sessions.each_with_index do |session, index| %>
+        <% items.each_with_index do |item, index| %>
           <tr class="<%= 'table-secondary' if index.even? %>">
-            <td><%= session[:schedule] %></td>
-            <td><%= session[:title] %></td>
-            <% if session[:duration].present? %>
-              <td><%= "#{session[:duration]} Min" %></td>
+            <td><%= item[:schedule] %></td>
+            <td><%= item[:title] %></td>
+            <% if item[:duration].present? %>
+              <td><%= "#{item[:duration]} Min" %></td>
             <% end %>
-            <% if session[:duration].present? %>
+            <% if item[:id].present? %>
               <td>
-                <!-- <%= link_to "Edit this session", edit_lecture_path(session) %> -->
+                <%= link_to "Show", lecture_path(id: item[:id]) %>
+                <%= link_to "Edit", edit_lecture_path(id: item[:id]) %>
               </td>
             <% end %>
           </tr>
