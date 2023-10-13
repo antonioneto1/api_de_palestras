@@ -3,8 +3,9 @@
 <%= render @lecture %>
 
 <div>
-  <%= link_to "Edit this lecture", edit_lecture_path(@lecture) %> |
-  <%= link_to "Back to lectures", lectures_path %>
+  <%= link_to "Edit", edit_lecture_path(@lecture), class: "btn btn-primary" %> |
+  <%= link_to "Back", lectures_path, class: "btn btn-secondary" %>
 
-  <%= button_to "Destroy this lecture", @lecture, method: :delete %>
+  <%= button_to "Destroy", @lecture, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
 </div>
+

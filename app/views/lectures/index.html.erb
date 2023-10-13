@@ -1,5 +1,22 @@
 <div data-controller="lecture" class="container mt-4">
-  <h1 class="text-center">Lista de Palestras</h1>
+  
+  <h1 class="text-center">Palestras no dia da Conferência</h1>
+
+  <div class="d-flex justify-content-between">
+    <%= form_tag({ action: :import_csv }, multipart: true) do %>
+      <div class="form-group">
+        <%= file_field_tag :file, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= submit_tag 'Importar CSV', class: 'btn btn-success' %>
+      </div>
+    <% end %>
+  
+    <div class="form-group">
+      <%= link_to "Adicionar Palestras", new_lecture_path, class: "btn btn-success" %>
+    </div>
+  </div>  
+
   <table class="table table-bordered">
     <thead class="thead-dark">
       <tr>
@@ -31,7 +48,5 @@
         <% end %>
       <% end %>
     </tbody>
-  </table>
-
-  <%= link_to "Adicionar Palestras", new_lecture_path %>
+  </table> 
 </div>
