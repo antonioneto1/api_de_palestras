@@ -49,7 +49,8 @@ class OrganizeTracksService
                             schedule: schedules,
                             title: item[:title],
                             duration: item[:duration],
-                            track: track
+                            track: track,
+                            id: item[:id]
                           }
 
       current_minutes += only_numbers_from_minutes

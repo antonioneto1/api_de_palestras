@@ -14,17 +14,13 @@ class ExtractSchedulesService
     data_lactures_formatted = []
 
     @data_lactures.each do |row|
-      title = extract_title(row)
+      title = row.dig("title")
       duration = extract_duration(row)
 
       data_lactures_formatted << { title: title, duration: duration }
     end
 
     data_lactures_formatted
-  end
-
-  def extract_title(row)
-    row.dig("title").gsub(/\s+/, " ").strip.match(/.*[\D]+?\s/).to_s
   end
 
   def extract_duration(row)

@@ -35,10 +35,8 @@ class Api::V1::LecturesController < Api::V1::ApiController
 
     @tracks = OrganizeTracksService.new(@lectures).run
 
-    if @tracks[:organize]
-      render json: @tracks[:data] || [], status: 200
-    else
-      render json: { error: @tracks[:error] }, status: 500
+    respond_to do |format|
+      format.json { render json: @tracks }
     end
   end
 end

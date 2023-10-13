@@ -12,7 +12,7 @@ module ApiDePalestras
     config.load_defaults 7.0
     config.assets.enabled = true
 
-    # Configuration for the application, engines, and railties goes here.
+    # Configuration for the application, engines, and railties goes here.]
     #
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.

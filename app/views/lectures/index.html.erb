@@ -6,6 +6,7 @@
         <th>Horário</th>
         <th>Título</th>
         <th>Duração (minutos)</th>
+        <th>Ações</th>
       </tr>
     </thead>
     <tbody>
@@ -19,6 +20,11 @@
             <td><%= session[:title] %></td>
             <% if session[:duration].present? %>
               <td><%= "#{session[:duration]} Min" %></td>
+            <% end %>
+            <% if session[:duration].present? %>
+              <td>
+                <!-- <%= link_to "Edit this session", edit_lecture_path(session) %> -->
+              </td>
             <% end %>
           </tr>
         <% end %>

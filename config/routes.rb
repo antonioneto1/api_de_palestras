@@ -8,10 +8,13 @@ Rails.application.routes.draw do
 
   resources :lectures do
     collection do
-      get :index
-      get :new
       get :import
       post :import_csv
     end
+    member do
+      delete :destroy
+    end
   end
+
+  root 'lectures#index'
 end
