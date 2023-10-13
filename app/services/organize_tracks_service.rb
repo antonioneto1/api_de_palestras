@@ -43,18 +43,23 @@ class OrganizeTracksService
     if current_minutes == @minutes_in_hours['12:00'] && current_minutes <= @minutes_in_hours['13:00']
       current_minutes, schedules_array = handle_lunch_break(item, track, current_minutes, schedules, schedules_array)
     elsif current_minutes >= @minutes_in_hours['17:00']
-      current_minutes, track, schedules_array = handle_networking_event(item, track, current_minutes, schedules_array)
+      current_minutes, schedules_array = handle_networking_event(item, track, current_minutes, schedules_array)
     else
-      schedules_array << {
-                            schedule: schedules,
-                            title: item[:title],
-                            duration: item[:duration],
-                            track: track,
-                            id: item[:id]
-                          }
-
-      current_minutes += only_numbers_from_minutes
+      current_minutes, schedules_array = handle_default(item, track, current_minutes, schedules, schedules_array, only_numbers_from_minutes)
     end
+    [current_minutes, schedules_array]
+  end
+
+  def handle_default(item, track, current_minutes, schedules, schedules_array, only_numbers_from_minutes)
+    schedules_array << {
+      schedule: schedules,
+      title: item[:title],
+      duration: item[:duration],
+      track: track,
+      id: item[:id]
+    }
+
+    current_minutes += only_numbers_from_minutes
     [current_minutes, schedules_array]
   end
 
@@ -112,7 +117,7 @@ class OrganizeTracksService
     schedules_array << { schedule: formatted_duration(current_minutes), title: old_title, duration: old_minutes, track: @track, id: id }
 
     current_minutes += old_minutes
-    [current_minutes, @track, schedules_array]
+    [current_minutes, schedules_array]
   end
 
   def add_networking_event_if_needed(track, schedules_array)
