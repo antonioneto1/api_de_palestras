@@ -1,7 +1,8 @@
 class OrganizeTracksService
-
   def initialize(lectures)
-    @lectures = lectures
+    # 540 de até 720 são 180
+    # 780 de até 1020 são 240
+    @lectures = organize_lectures(lectures, [180, 240])
     @alphabet_index = ('A'..'Z').to_a
     @minutes_in_hours = {
       '9h' => 540, '12h' => 720, '13h' => 780, '15h' => 900, '16h' => 960, '17h' => 1020
@@ -14,16 +15,13 @@ class OrganizeTracksService
     @track = @alphabet_index[@count_track]
   end
 
-  # 540 de até 720 são 180
-  # 780 de até 1020 são 240
-
   def run
-    organize_tracks
+    create_tracks
   end
 
   private
 
-  def organize_tracks
+  def create_tracks
     current_minutes = @minutes_in_hours['9h']
 
     schedules_array = []
@@ -129,5 +127,40 @@ class OrganizeTracksService
     formatMinutes = minutes.split('min')[0].to_i == 0 ? '00' : minutes
 
     "#{ formatHours }:#{ formatMinutes }".strip
+  end
+
+  def find_hours_combination(itens, minute_sum)
+    return [] if minute_sum <= 0
+    return nil if itens.empty?
+
+    first_data = itens[0]
+    return [first_data] if first_data['duration'].to_i == minute_sum
+
+    combination_without_first = find_hours_combination(itens[1..-1], minute_sum)
+    combination_with_first = find_hours_combination(itens[1..-1], minute_sum - first_data['duration'].to_i)
+    combination_with_first << first_data if combination_with_first
+
+    if combination_with_first.nil?
+      combination_without_first
+    elsif combination_without_first.nil?
+      combination_with_first
+    else
+      combination_without_first.length < combination_with_first.length ? combination_without_first : combination_with_first
+    end
+  end
+
+  def organize_lectures(lectures_base, minutes)
+    lectures = []
+
+    until lectures_base.empty?
+      minutes.each do |minute|
+        break if lectures_base.empty?
+
+        lactures_ordened = find_hours_combination(lectures_base, minute)
+        lectures += (lactures_ordened.nil? ? lectures_base : lactures_ordened.sort_by { |lacture| lacture[:id] })
+        lectures_base = lectures_base.reject { |element| lectures.include?(element) }
+      end
+    end
+    lectures
   end
 end
