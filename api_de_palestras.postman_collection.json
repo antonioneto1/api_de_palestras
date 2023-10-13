@@ -1,0 +1,266 @@
+{
+	"info": {
+		"_postman_id": "e7251ef5-d404-412c-b61c-e0323aab9429",
+		"name": "Api de Palestras",
+		"description": "DESCRIÇÃO DO PROJETO  \nEsté projeto tem como objetivo planejar e organizar as palestras em Traks, Levando em consideração o horario de incio, pausas e fim!",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30124778"
+	},
+	"item": [
+		{
+			"name": "Create Lectures",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    { \"title\": \"Diminuindo tempo de execução de testes em aplicações Rails enterprise\", \"duration\": \"60\" },\n    { \"title\": \"Reinventando a roda em ASP clássico\", \"duration\": \"45\" },\n    { \"title\": \"Apresentando Lua para as massas\", \"duration\": \"30\" },\n    { \"title\": \"Erros de Ruby oriundos de versões erradas de gems\", \"duration\": \"45\" },\n    { \"title\": \"Erros comuns em Ruby\", \"duration\": \"45\" },\n    { \"title\": \"Rails para usuários de Django\", \"duration\": \"5\" },\n    { \"title\": \"Trabalho remoto: prós e cons\", \"duration\": \"60\" },\n    { \"title\": \"Desenvolvimento orientado a gambiarras\", \"duration\": \"45\" },\n    { \"title\": \"Aplicações isomórficas: o futuro (que talvez nunca chegaremos)\", \"duration\": \"30\" },\n    { \"title\": \"Codifique menos, Escreva mais!\", \"duration\": \"30\" },\n    { \"title\": \"Programação em par\", \"duration\": \"45\" },\n    { \"title\": \"A mágica do Rails: como ser mais produtivo\", \"duration\": \"60\" },\n    { \"title\": \"Ruby on Rails: Por que devemos deixá-lo para trás\", \"duration\": \"60\" },\n    { \"title\": \"Clojure engoliu Scala: migrando minha aplicação\", \"duration\": \"45\" },\n    { \"title\": \"Ensinando programação nas grotas de Maceió\", \"duration\": \"30\" },\n    { \"title\": \"Ruby vs. Clojure para desenvolvimento backend\", \"duration\": \"30\" },\n    { \"title\": \"Manutenção de aplicações legadas em Ruby on Rails\", \"duration\": \"60\" },\n    { \"title\": \"Um mundo sem StackOverflow\", \"duration\": \"30\" },\n    { \"title\": \"Otimizando CSS em aplicações Rails\", \"duration\": \"30\" }\n]\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/lecture/import",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"lecture",
+						"import"
+					]
+				},
+				"description": "Para a criação de um Evento, é necessario Um titulo do Evento e le precisa ser unico por palestra, alem disto é necessario informar a duração desta palestra"
+			},
+			"response": [
+				{
+					"name": "200",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    { \"title\": \"Diminuindo tempo de execução de testes em aplicações Rails enterprise\", \"duration\": \"60\" },\n    { \"title\": \"Reinventando a roda em ASP clássico\", \"duration\": \"45\" },\n    { \"title\": \"Apresentando Lua para as massas\", \"duration\": \"30\" },\n    { \"title\": \"Erros de Ruby oriundos de versões erradas de gems\", \"duration\": \"45\" },\n    { \"title\": \"Erros comuns em Ruby\", \"duration\": \"45\" },\n    { \"title\": \"Rails para usuários de Django\", \"duration\": \"5\" },\n    { \"title\": \"Trabalho remoto: prós e cons\", \"duration\": \"60\" },\n    { \"title\": \"Desenvolvimento orientado a gambiarras\", \"duration\": \"45\" },\n    { \"title\": \"Aplicações isomórficas: o futuro (que talvez nunca chegaremos)\", \"duration\": \"30\" },\n    { \"title\": \"Codifique menos, Escreva mais!\", \"duration\": \"30\" },\n    { \"title\": \"Programação em par\", \"duration\": \"45\" },\n    { \"title\": \"A mágica do Rails: como ser mais produtivo\", \"duration\": \"60\" },\n    { \"title\": \"Ruby on Rails: Por que devemos deixá-lo para trás\", \"duration\": \"60\" },\n    { \"title\": \"Clojure engoliu Scala: migrando minha aplicação\", \"duration\": \"45\" },\n    { \"title\": \"Ensinando programação nas grotas de Maceió\", \"duration\": \"30\" },\n    { \"title\": \"Ruby vs. Clojure para desenvolvimento backend\", \"duration\": \"30\" },\n    { \"title\": \"Manutenção de aplicações legadas em Ruby on Rails\", \"duration\": \"60\" },\n    { \"title\": \"Um mundo sem StackOverflow\", \"duration\": \"30\" },\n    { \"title\": \"Otimizando CSS em aplicações Rails\", \"duration\": \"30\" }\n]\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/lecture/import",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"lecture",
+								"import"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Permitted-Cross-Domain-Policies",
+							"value": "none"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"54380f4a82f91de0183df22a59005f1f\""
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "X-Request-Id",
+							"value": "3e6fae0c-9ab7-4567-a6c7-557d7b9c9062"
+						},
+						{
+							"key": "X-Runtime",
+							"value": "0.215573"
+						},
+						{
+							"key": "Server-Timing",
+							"value": "sql.active_record;dur=116.19, start_processing.action_controller;dur=0.21, process_action.action_controller;dur=138.34"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"created_lectures\": [\n        {\n            \"id\": 1,\n            \"title\": \"Diminuindo tempo de execução de testes em aplicações Rails \",\n            \"duration\": 60,\n            \"created_at\": \"2023-10-12T13:26:01.370Z\",\n            \"updated_at\": \"2023-10-12T13:26:01.370Z\"\n        },\n        {\n            \"id\": 2,\n            \"title\": \"Reinventando a roda em ASP \",\n            \"duration\": 45,\n            \"created_at\": \"2023-10-12T13:26:01.387Z\",\n            \"updated_at\": \"2023-10-12T13:26:01.387Z\"\n        },\n        {\n            \"id\": 3,\n            \"title\": \"Apresentando Lua para as \",\n            \"duration\": 30,\n            \"created_at\": \"2023-10-12T13:26:01.394Z\",\n            \"updated_at\": \"2023-10-12T13:26:01.394Z\"\n        },\n        {\n            \"id\": 4,\n            \"title\": \"Erros de Ruby oriundos de versões erradas de \",\n            \"duration\": 45,\n            \"created_at\": \"2023-10-12T13:26:01.399Z\",\n            \"updated_at\": \"2023-10-12T13:26:01.399Z\"\n        },\n        {\n            \"id\": 5,\n            \"title\": \"Erros comuns em \",\n            \"duration\": 45,\n            \"created_at\": \"2023-10-12T13:26:01.403Z\",\n            \"updated_at\": \"2023-10-12T13:26:01.403Z\"\n        },\n        {\n            \"id\": 6,\n            \"title\": \"Rails para usuários de \",\n            \"duration\": 5,\n            \"created_at\": \"2023-10-12T13:26:01.408Z\",\n            \"updated_at\": \"2023-10-12T13:26:01.408Z\"\n        },\n        {\n            \"id\": 7,\n            \"title\": \"Trabalho remoto: prós e \",\n            \"duration\": 60,\n            \"created_at\": \"2023-10-12T13:26:01.412Z\",\n            \"updated_at\": \"2023-10-12T13:26:01.412Z\"\n        },\n        {\n            \"id\": 8,\n            \"title\": \"Desenvolvimento orientado a \",\n            \"duration\": 45,\n            \"created_at\": \"2023-10-12T13:26:01.417Z\",\n            \"updated_at\": \"2023-10-12T13:26:01.417Z\"\n        },\n        {\n            \"id\": 9,\n            \"title\": \"Aplicações isomórficas: o futuro (que talvez nunca \",\n            \"duration\": 30,\n            \"created_at\": \"2023-10-12T13:26:01.420Z\",\n            \"updated_at\": \"2023-10-12T13:26:01.420Z\"\n        },\n        {\n            \"id\": 10,\n            \"title\": \"Codifique menos, Escreva \",\n            \"duration\": 30,\n            \"created_at\": \"2023-10-12T13:26:01.423Z\",\n            \"updated_at\": \"2023-10-12T13:26:01.423Z\"\n        },\n        {\n            \"id\": 11,\n            \"title\": \"Programação em \",\n            \"duration\": 45,\n            \"created_at\": \"2023-10-12T13:26:01.427Z\",\n            \"updated_at\": \"2023-10-12T13:26:01.427Z\"\n        },\n        {\n            \"id\": 12,\n            \"title\": \"A mágica do Rails: como ser mais \",\n            \"duration\": 60,\n            \"created_at\": \"2023-10-12T13:26:01.430Z\",\n            \"updated_at\": \"2023-10-12T13:26:01.430Z\"\n        },\n        {\n            \"id\": 13,\n            \"title\": \"Ruby on Rails: Por que devemos deixá-lo para \",\n            \"duration\": 60,\n            \"created_at\": \"2023-10-12T13:26:01.433Z\",\n            \"updated_at\": \"2023-10-12T13:26:01.433Z\"\n        },\n        {\n            \"id\": 14,\n            \"title\": \"Clojure engoliu Scala: migrando minha \",\n            \"duration\": 45,\n            \"created_at\": \"2023-10-12T13:26:01.436Z\",\n            \"updated_at\": \"2023-10-12T13:26:01.436Z\"\n        },\n        {\n            \"id\": 15,\n            \"title\": \"Ensinando programação nas grotas de \",\n            \"duration\": 30,\n            \"created_at\": \"2023-10-12T13:26:01.469Z\",\n            \"updated_at\": \"2023-10-12T13:26:01.469Z\"\n        },\n        {\n            \"id\": 16,\n            \"title\": \"Ruby vs. Clojure para desenvolvimento \",\n            \"duration\": 30,\n            \"created_at\": \"2023-10-12T13:26:01.483Z\",\n            \"updated_at\": \"2023-10-12T13:26:01.483Z\"\n        },\n        {\n            \"id\": 17,\n            \"title\": \"Manutenção de aplicações legadas em Ruby on \",\n            \"duration\": 60,\n            \"created_at\": \"2023-10-12T13:26:01.487Z\",\n            \"updated_at\": \"2023-10-12T13:26:01.487Z\"\n        },\n        {\n            \"id\": 18,\n            \"title\": \"Um mundo sem \",\n            \"duration\": 30,\n            \"created_at\": \"2023-10-12T13:26:01.490Z\",\n            \"updated_at\": \"2023-10-12T13:26:01.490Z\"\n        },\n        {\n            \"id\": 19,\n            \"title\": \"Otimizando CSS em aplicações \",\n            \"duration\": 30,\n            \"created_at\": \"2023-10-12T13:26:01.493Z\",\n            \"updated_at\": \"2023-10-12T13:26:01.493Z\"\n        }\n    ],\n    \"errors\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "Organize Event",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/lecture/organize_event",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"lecture",
+						"organize_event"
+					]
+				},
+				"description": "O processo de organização já é feito da seguinte forma!\n\nSessões pela manhã começam às 9h e devem terminar às 12h, para o almoço.\n\nSessões pela tarde começam às 13h e devem terminar a tempo de realizar o  \nevento de networking.\n\nO evento de networking deve começar entre 16h e 17h."
+			},
+			"response": [
+				{
+					"name": "200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/lecture/organize_event",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"lecture",
+								"organize_event"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Permitted-Cross-Domain-Policies",
+							"value": "none"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"72d3a894fb1fdc4eb6195f7571eca4c1\""
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "X-Request-Id",
+							"value": "85a87e1b-ba04-4e12-9cb4-1fd8019d52d5"
+						},
+						{
+							"key": "X-Runtime",
+							"value": "0.003668"
+						},
+						{
+							"key": "Server-Timing",
+							"value": "start_processing.action_controller;dur=0.05, sql.active_record;dur=0.53, instantiation.active_record;dur=0.06, process_action.action_controller;dur=2.06"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"schedule\": \"09:00\",\n        \"title\": \"Diminuindo tempo de execução de testes em aplicações Rails \",\n        \"duration\": 60,\n        \"track\": \"A\"\n    },\n    {\n        \"schedule\": \"10:00\",\n        \"title\": \"Reinventando a roda em ASP \",\n        \"duration\": 45,\n        \"track\": \"A\"\n    },\n    {\n        \"schedule\": \"10:45\",\n        \"title\": \"Apresentando Lua para as \",\n        \"duration\": 30,\n        \"track\": \"A\"\n    },\n    {\n        \"schedule\": \"11:15\",\n        \"title\": \"Erros de Ruby oriundos de versões erradas de \",\n        \"duration\": 45,\n        \"track\": \"A\"\n    },\n    {\n        \"schedule\": \"12h\",\n        \"title\": \"almoço\",\n        \"duration\": \"\",\n        \"track\": \"A\"\n    },\n    {\n        \"schedule\": \"13:00\",\n        \"title\": \"Erros comuns em \",\n        \"duration\": 45,\n        \"track\": \"A\"\n    },\n    {\n        \"schedule\": \"13:45\",\n        \"title\": \"Rails para usuários de \",\n        \"duration\": 5,\n        \"track\": \"A\"\n    },\n    {\n        \"schedule\": \"13:50\",\n        \"title\": \"Trabalho remoto: prós e \",\n        \"duration\": 60,\n        \"track\": \"A\"\n    },\n    {\n        \"schedule\": \"14:50\",\n        \"title\": \"Desenvolvimento orientado a \",\n        \"duration\": 45,\n        \"track\": \"A\"\n    },\n    {\n        \"schedule\": \"15:35\",\n        \"title\": \"Aplicações isomórficas: o futuro (que talvez nunca \",\n        \"duration\": 30,\n        \"track\": \"A\"\n    },\n    {\n        \"schedule\": \"16:5\",\n        \"title\": \"Codifique menos, Escreva \",\n        \"duration\": 30,\n        \"track\": \"A\"\n    },\n    {\n        \"schedule\": \"16:35\",\n        \"title\": \"Programação em \",\n        \"duration\": 45,\n        \"track\": \"A\"\n    },\n    {\n        \"schedule\": \"17h\",\n        \"title\": \"Evento de netWork\",\n        \"duration\": \"\",\n        \"track\": \"A\"\n    },\n    {\n        \"schedule\": \"09:00\",\n        \"title\": \"A mágica do Rails: como ser mais \",\n        \"duration\": 60,\n        \"track\": \"B\"\n    },\n    {\n        \"schedule\": \"10:00\",\n        \"title\": \"Ruby on Rails: Por que devemos deixá-lo para \",\n        \"duration\": 60,\n        \"track\": \"B\"\n    },\n    {\n        \"schedule\": \"11:00\",\n        \"title\": \"Clojure engoliu Scala: migrando minha \",\n        \"duration\": 45,\n        \"track\": \"B\"\n    },\n    {\n        \"schedule\": \"11:45\",\n        \"title\": \"Ensinando programação nas grotas de \",\n        \"duration\": 30,\n        \"track\": \"B\"\n    },\n    {\n        \"schedule\": \"12h\",\n        \"title\": \"almoço\",\n        \"duration\": \"\",\n        \"track\": \"B\"\n    },\n    {\n        \"schedule\": \"13:00\",\n        \"title\": \"Ruby vs. Clojure para desenvolvimento \",\n        \"duration\": 30,\n        \"track\": \"B\"\n    },\n    {\n        \"schedule\": \"13:30\",\n        \"title\": \"Manutenção de aplicações legadas em Ruby on \",\n        \"duration\": 60,\n        \"track\": \"B\"\n    },\n    {\n        \"schedule\": \"14:30\",\n        \"title\": \"Um mundo sem \",\n        \"duration\": 30,\n        \"track\": \"B\"\n    },\n    {\n        \"schedule\": \"15:00\",\n        \"title\": \"Otimizando CSS em aplicações \",\n        \"duration\": 30,\n        \"track\": \"B\"\n    },\n    {\n        \"schedule\": \"17h\",\n        \"title\": \"Evento de netWork\",\n        \"duration\": \"\",\n        \"track\": \"B\"\n    }\n]"
+				}
+			]
+		}
+	]
+}
