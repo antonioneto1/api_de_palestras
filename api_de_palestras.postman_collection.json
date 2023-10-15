@@ -22,7 +22,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/v1/lecture/import",
+					"raw": "http://localhost:3000/api/v1/lectures/import",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -31,7 +31,7 @@
 					"path": [
 						"api",
 						"v1",
-						"lecture",
+						"lectures",
 						"import"
 					]
 				},
@@ -134,6 +134,164 @@
 			]
 		},
 		{
+			"name": "Edit Multiple Lectures",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"lecture_updates\": [\n    { \"id\": 26, \"title\": \"Diminuindo tempo de execução de testes em aplicações Rails enterprise\", \"duration\": 45 },\n    { \"id\": 32, \"title\": \"Rails para usuários de Django\", \"duration\": 25 }\n  ]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/lectures/update_multiple",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"lectures",
+						"update_multiple"
+					]
+				},
+				"description": "Para a criação de um Evento, é necessario Um titulo do Evento e le precisa ser unico por palestra, alem disto é necessario informar a duração desta palestra"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Multiple Lectures",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"lecture_ids\": [ 12,13,1 ]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/lectures/destroy_multiple",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"lectures",
+						"destroy_multiple"
+					]
+				},
+				"description": "Para a criação de um Evento, é necessario Um titulo do Evento e le precisa ser unico por palestra, alem disto é necessario informar a duração desta palestra"
+			},
+			"response": [
+				{
+					"name": "200",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    { \"title\": \"Diminuindo tempo de execução de testes em aplicações Rails enterprise\", \"duration\": \"60\" },\n    { \"title\": \"Reinventando a roda em ASP clássico\", \"duration\": \"45\" },\n    { \"title\": \"Apresentando Lua para as massas\", \"duration\": \"30\" },\n    { \"title\": \"Erros de Ruby oriundos de versões erradas de gems\", \"duration\": \"45\" },\n    { \"title\": \"Erros comuns em Ruby\", \"duration\": \"45\" },\n    { \"title\": \"Rails para usuários de Django\", \"duration\": \"5\" },\n    { \"title\": \"Trabalho remoto: prós e cons\", \"duration\": \"60\" },\n    { \"title\": \"Desenvolvimento orientado a gambiarras\", \"duration\": \"45\" },\n    { \"title\": \"Aplicações isomórficas: o futuro (que talvez nunca chegaremos)\", \"duration\": \"30\" },\n    { \"title\": \"Codifique menos, Escreva mais!\", \"duration\": \"30\" },\n    { \"title\": \"Programação em par\", \"duration\": \"45\" },\n    { \"title\": \"A mágica do Rails: como ser mais produtivo\", \"duration\": \"60\" },\n    { \"title\": \"Ruby on Rails: Por que devemos deixá-lo para trás\", \"duration\": \"60\" },\n    { \"title\": \"Clojure engoliu Scala: migrando minha aplicação\", \"duration\": \"45\" },\n    { \"title\": \"Ensinando programação nas grotas de Maceió\", \"duration\": \"30\" },\n    { \"title\": \"Ruby vs. Clojure para desenvolvimento backend\", \"duration\": \"30\" },\n    { \"title\": \"Manutenção de aplicações legadas em Ruby on Rails\", \"duration\": \"60\" },\n    { \"title\": \"Um mundo sem StackOverflow\", \"duration\": \"30\" },\n    { \"title\": \"Otimizando CSS em aplicações Rails\", \"duration\": \"30\" }\n]\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/lecture/import",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"lecture",
+								"import"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Permitted-Cross-Domain-Policies",
+							"value": "none"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"54380f4a82f91de0183df22a59005f1f\""
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "X-Request-Id",
+							"value": "3e6fae0c-9ab7-4567-a6c7-557d7b9c9062"
+						},
+						{
+							"key": "X-Runtime",
+							"value": "0.215573"
+						},
+						{
+							"key": "Server-Timing",
+							"value": "sql.active_record;dur=116.19, start_processing.action_controller;dur=0.21, process_action.action_controller;dur=138.34"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": \"Palestras excluídas com sucesso\"\n}"
+				}
+			]
+		},
+		{
 			"name": "Organize Event",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -151,7 +309,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/v1/lecture/organize_event",
+					"raw": "http://localhost:3000/api/v1/lectures/organize_event",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -160,7 +318,7 @@
 					"path": [
 						"api",
 						"v1",
-						"lecture",
+						"lectures",
 						"organize_event"
 					]
 				},

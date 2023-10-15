@@ -103,10 +103,10 @@ Agora a API deve estar disponível em `http://localhost:3000/`.
     rspec
     ```
 
-2. RSwag para geração da documentação Swagger:
+2. Link da Documentação do Postman:
 
     ```bash
-    rake rswag:specs:swaggerize
+    https://documenter.getpostman.com/view/30124778/2s9YR6ZDsb
     ```
 
 ### Informações Adicionais

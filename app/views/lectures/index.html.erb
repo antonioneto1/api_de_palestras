@@ -48,5 +48,11 @@
         <% end %>
       <% end %>
     </tbody>
-  </table> 
+  </table>
+
+  <div class="form-group">
+    <div class="text-right">
+      <%= button_to "Excluir Todas as Palestras", destroy_all_lectures_path, method: :delete, data: { confirm: 'Tem certeza que deseja apagar todas as palestras?' }, class: 'btn btn-danger' %>
+    </div>
+  </div>
 </div>

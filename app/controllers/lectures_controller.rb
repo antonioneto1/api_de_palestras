@@ -4,6 +4,7 @@ class LecturesController < ApplicationController
 
   def index
     @lectures = Lecture.all
+    @tracks = {}
 
     return [] if @lectures.empty?
 
@@ -11,6 +12,7 @@ class LecturesController < ApplicationController
 
     if organized_tracks[:organize]
       organized_data = {}
+
       organized_tracks[:data].each do |item|
         track = item[:track]
         organized_data[track] ||= []
@@ -76,6 +78,11 @@ class LecturesController < ApplicationController
         format.json { render json: @lecture.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def destroy_all
+    Lecture.destroy_all
+    redirect_to lectures_path, notice: 'Todas as palestras foram apagadas com sucesso.'
   end
 
   def update
