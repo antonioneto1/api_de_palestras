@@ -1,8 +1,5 @@
 class OrganizeTracksService
   def initialize(lectures)
-    # 540 de até 720 são 180
-    # 780 de até 1020 são 240
-    @lectures = organize_lectures(lectures, [180, 240])
     @alphabet_index = ('A'..'Z').to_a
     @minutes_in_hours = {
       '9:00' => 540, '12:00' => 720, '13:00' => 780, '15:00' => 900, '16:00' => 960, '17:00' => 1020
@@ -13,6 +10,10 @@ class OrganizeTracksService
     }
     @count_track = 0
     @track = @alphabet_index[@count_track]
+
+    morning_duration = @minutes_in_hours['12:00'] - @minutes_in_hours['9:00']
+    afternoon_duration = @minutes_in_hours['17:00'] - @minutes_in_hours['13:00']
+    @lectures = organize_lectures(lectures, [morning_duration, afternoon_duration])
   end
 
   def run
@@ -40,60 +41,52 @@ class OrganizeTracksService
   end
 
   def process_item(item, track, current_minutes, only_numbers_from_minutes, schedules, schedules_array)
-    if current_minutes == @minutes_in_hours['12:00'] && current_minutes <= @minutes_in_hours['13:00']
-      current_minutes, schedules_array = handle_lunch_break(item, track, current_minutes, schedules, schedules_array)
-    elsif current_minutes >= @minutes_in_hours['17:00']
-      current_minutes, schedules_array = handle_networking_event(item, track, current_minutes, schedules_array)
+    case
+    when lunch_break?(current_minutes)
+      current_minutes, schedules_array = handle_lunch_break(item, track, schedules_array)
+    when networking_event?(current_minutes)
+      current_minutes, schedules_array = handle_networking_event(item, track, schedules_array)
     else
       current_minutes, schedules_array = handle_default(item, track, current_minutes, schedules, schedules_array, only_numbers_from_minutes)
     end
     [current_minutes, schedules_array]
   end
 
-  def handle_default(item, track, current_minutes, schedules, schedules_array, only_numbers_from_minutes)
-    schedules_array << {
-      schedule: schedules,
-      title: item[:title],
-      duration: item[:duration],
-      track: track,
-      id: item[:id]
-    }
+  def lunch_break?(current_minutes)
+    current_minutes == @minutes_in_hours['12:00'] && current_minutes <= @minutes_in_hours['13:00']
+  end
 
+  def networking_event?(current_minutes)
+    current_minutes >= @minutes_in_hours['17:00']
+  end
+
+  def add_event(schedules_array, schedule, title, duration, track, id = nil)
+    event = {
+      schedule: schedule,
+      title: title,
+      duration: duration,
+      track: track
+    }
+    event[:id] = id if id
+
+    schedules_array << event
+  end
+
+  def handle_default(item, track, current_minutes, schedules, schedules_array, only_numbers_from_minutes)
+    add_event(schedules_array, schedules, item[:title], item[:duration], track, item[:id])
     current_minutes += only_numbers_from_minutes
     [current_minutes, schedules_array]
   end
 
-  def handle_lunch_break(item, track, current_minutes, schedules, schedules_array)
-    old_schedules = schedules
-    old_title = item[:title]
-    old_minutes = item[:duration]
-    new_schedules = @coffee_break['lunch']['hour']
-    new_title = @coffee_break['lunch']['title']
-    new_minutes = @coffee_break['lunch']['duration']
-    id = item[:id]
-
-    schedules_array << {
-                        schedule: new_schedules,
-                        title: new_title,
-                        duration: new_minutes,
-                        track: track
-                      }
-
-    current_minutes = @minutes_in_hours['13:00']
-
-    schedules_array << {
-                        schedule: formatted_duration(@minutes_in_hours['13:00']),
-                        title: old_title,
-                        duration: old_minutes,
-                        track: track,
-                        id: id
-                      }
-
-    current_minutes += old_minutes
-    [current_minutes, schedules_array]
+  def handle_lunch_break(item, track, schedules_array)
+    add_event(schedules_array, @coffee_break['lunch']['hour'], @coffee_break['lunch']['title'], @coffee_break['lunch']['duration'], track)
+    new_current_minutes = @minutes_in_hours['13:00']
+    add_event(schedules_array, '13:00', item[:title], item[:duration], track, item[:id])
+    new_current_minutes += item[:duration]
+    [new_current_minutes, schedules_array]
   end
 
-  def handle_networking_event(item, track, current_minutes, schedules_array)
+  def handle_networking_event(item, track, schedules_array)
     old_minutes = item[:duration]
     old_title = item[:title]
     new_schedules = @coffee_break['network']['hour']
@@ -102,31 +95,25 @@ class OrganizeTracksService
     id = item[:id]
 
     schedules_array << {
-                        schedule: new_schedules,
-                        title: new_title,
-                        duration: new_minutes,
-                        track: track
-                      }
+      schedule: new_schedules,
+      title: new_title,
+      duration: new_minutes,
+      track: track
+    }
 
     @count_track += 1
-
     @track = @alphabet_index[@count_track]
 
-    current_minutes = @minutes_in_hours['9:00']
+    new_current_minutes = @minutes_in_hours['9:00']
 
-    schedules_array << { schedule: formatted_duration(current_minutes), title: old_title, duration: old_minutes, track: @track, id: id }
+    schedules_array << { schedule: formatted_duration(new_current_minutes), title: old_title, duration: old_minutes, track: @track, id: id }
 
-    current_minutes += old_minutes
-    [current_minutes, schedules_array]
+    new_current_minutes += old_minutes
+    [new_current_minutes, schedules_array]
   end
 
   def add_networking_event_if_needed(track, schedules_array)
-    schedules_array << {
-                          schedule: @coffee_break['network']['hour'],
-                          title: @coffee_break['network']['title'],
-                          duration: @coffee_break['network']['duration'],
-                          track: track
-                        }
+    add_event(schedules_array, @coffee_break['network']['hour'], @coffee_break['network']['title'], @coffee_break['network']['duration'], track)
   end
 
   def formatted_duration(total_minute)
